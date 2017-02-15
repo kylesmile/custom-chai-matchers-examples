@@ -1,0 +1,20 @@
+{
+  "name": "js_testing",
+  "version": "1.0.0",
+  "description": "Compare JS testing frameworks",
+  "main": "index.js",
+  "author": "Kyle Smith",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --require babel-register"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-env": "^1.1.8",
+    "babel-register": "^6.23.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
