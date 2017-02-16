@@ -6,13 +6,38 @@ import locatorMatchers from './matchers/locator_matchers';
 chai.use(locatorMatchers);
 
 describe('Point', function() {
-  it('is at a position in space', function() {
-    const point1 = new Point(0, 0);
-    const point2 = new Point(25, 0);
-    const point3 = new Point(3, 0);
+  it('can be at the origin', function() {
+    const originPoint = new Point(0, 0);
+    const notOriginPoint = new Point(1, 1);
+    expect(originPoint).to.be.locatedAt.origin;
+    expect(notOriginPoint).to.not.be.locatedAt.origin;
+  });
 
-    expect(point2).to.be.within(3).feet.of.locator(point1);
-    expect(point3).to.be.within(4).inches.of.locator(point1);
+  it('is at a location', function() {
+    const point1 = new Point(3, 4);
+    const point2 = new Point(10, 10);
+
+    expect(point1).to.be.locatedAt(3, 4);
+    expect(point1).to.not.be.locatedAt(10, 10);
+    expect(point2).to.be.locatedAt(10, 10);
+  });
+
+  it('must be a locator or the matcher fails', function() {
+    const notALocator = {};
+
+    expect(function() {
+      expect(notALocator).to.be.locatedAt(3, 4);
+    }).to.throw(chai.AssertionError);
+  });
+
+  it('can be a distance from another point', function() {
+    const point = new Point(12, 0);
+    const anotherPoint = new Point(0, 0);
+
+    expect(point).to.be.atDistanceOf(12).inches.from(anotherPoint);
+    expect(point).to.be.atDistanceOf(1).foot.from(anotherPoint);
+    expect(point).to.not.be.atDistanceOf(1).inch.from(anotherPoint);
+    expect(point).to.not.be.atDistanceOf(2).feet.from(anotherPoint);
   });
 
   describe('#distanceTo', function() {
