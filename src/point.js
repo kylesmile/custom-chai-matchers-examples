@@ -12,7 +12,7 @@ export default class Point {
     return this._y;
   }
 
-  distance(other) {
+  distanceTo(other) {
     return Math.sqrt(Math.pow(this.x() - other.x(), 2) + Math.pow(this.y() - other.y(), 2));
   }
 

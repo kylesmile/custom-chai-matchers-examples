@@ -17,7 +17,7 @@ export default function(chai, utils) {
     const obj = utils.flag(this, 'object');
     const unit = utils.flag(this, 'unit');
     const multiplier = utils.flag(this, 'multiplier');
-    const distance = obj.distance(point);
+    const distance = obj.distanceTo(point);
     const maximum = utils.flag(this, 'distance');
     const assertion = new chai.Assertion(distance);
     assertion.assert(
