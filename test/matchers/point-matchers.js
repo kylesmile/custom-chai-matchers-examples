@@ -1,25 +1,22 @@
 import Point from '../../src/point';
 
-export default function defineLocatorMatchers(chai, utils) {
+export default function locatorMatchers(chai, utils) {
   chai.Assertion.addChainableMethod('locatedAt', function(x, y) {
     const object = utils.flag(this, 'object');
-    const isAtLocation = object.x() === x && object.y() === y;
     this.assert(
-      isAtLocation,
+      object.x() === x && object.y() === y,
       `expected ${object} to be located at (${x}, ${y})`,
       `expected ${object} to not be located at (${x}, ${y})`,
     );
   }, function() {
     const object = utils.flag(this, 'object');
-    const assertion = new chai.Assertion(object);
-    assertion.is.an.instanceof(Point);
+    new chai.Assertion(object).instanceOf(Point);
   });
 
   chai.Assertion.addProperty('origin', function() {
     const object = utils.flag(this, 'object');
-    const isOrigin = object.x() === 0 && object.y() === 0;
     this.assert(
-      isOrigin,
+      object.x() === 0 && object.y() === 0,
       `expected ${object} to be located at origin`,
       `expected ${object} to not be located at origin`
     );

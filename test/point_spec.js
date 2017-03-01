@@ -1,9 +1,9 @@
 import Point from '../src/point';
 import chai, { expect } from 'chai';
 import { describe, it } from 'mocha';
-import locatorMatchers from './matchers/locator_matchers';
+import pointMatchers from './matchers/point-matchers';
 
-chai.use(locatorMatchers);
+chai.use(pointMatchers);
 
 describe('Point', function() {
   it('can be at the origin', function() {
@@ -27,6 +27,10 @@ describe('Point', function() {
 
     expect(function() {
       expect(notALocator).to.be.locatedAt(3, 4);
+    }).to.throw(chai.AssertionError);
+
+    expect(function() { // The type check happens in the chaining behavior
+      expect(notALocator).to.be.locatedAt;
     }).to.throw(chai.AssertionError);
   });
 
